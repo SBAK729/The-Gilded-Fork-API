@@ -1,12 +1,18 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.chat import get_chat_response
+from pydantic import BaseModel
+
 import os
 
 load_dotenv()
 
 app = FastAPI()
+
+
+class Request(BaseModel):
+    quary: str
 
 # Enable CORS
 app.add_middleware(
@@ -19,7 +25,7 @@ app.add_middleware(
 
 @app.post("/chat")
 async def chat(request: Request):
-    data = await request.json()
+    data = await request.model_dump_json()
     question = data.get("question", "").strip()
 
     if not question:
