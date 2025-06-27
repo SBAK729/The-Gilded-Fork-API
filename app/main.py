@@ -12,7 +12,7 @@ app = FastAPI()
 
 
 class Request(BaseModel):
-    quary: str
+    question: str
 
 # Enable CORS
 app.add_middleware(
