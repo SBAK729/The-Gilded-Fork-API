@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Request
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.chat import get_chat_response
@@ -11,7 +11,7 @@ load_dotenv()
 app = FastAPI()
 
 
-class Request(BaseModel):
+class ChatRequest(BaseModel):
     question: str
 
 # Enable CORS
@@ -24,9 +24,9 @@ app.add_middleware(
 )
 
 @app.post("/chat")
-async def chat(request: Request):
-    data = await request.model_dump_json()
-    question = data.get("question", "").strip()
+async def chat(request: ChatRequest):
+    # data = await request.json()
+    question = request.question.strip()
 
     if not question:
         return {"error": "Question cannot be empty."}
