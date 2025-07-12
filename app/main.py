@@ -3,12 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.chat import get_chat_response
 from pydantic import BaseModel
+from app.routes import router
 
 import os
 
 load_dotenv()
 
-app = FastAPI()
+app = FastAPI(title="Restaurant Chatbot")
 
 
 class ChatRequest(BaseModel):
@@ -23,16 +24,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/chat")
-async def chat(request: ChatRequest):
-    # data = await request.json()
-    question = request.question.strip()
+app.include_router(router)
 
-    if not question:
-        return {"error": "Question cannot be empty."}
-
-    try:
-        response = await get_chat_response(question)
-        return {"answer": response}
-    except Exception as e:
-        return {"error": "Something went wrong. Please try again."}
