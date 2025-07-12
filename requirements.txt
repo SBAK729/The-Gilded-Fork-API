@@ -1,5 +1,15 @@
-fastapi==0.110.0
 uvicorn[standard]
-google-generativeai
-python-dotenv==1.0.1
-pydantic==2.7.1
+fastapi==0.103.1
+pydantic==1.10.13
+transformers
+sentence-transformers
+langchain
+langchain-community
+langchain-huggingface
+langchain-pinecone
+pinecone
+pypdf
+python-dotenv
+ctransformers
+
+-e .
