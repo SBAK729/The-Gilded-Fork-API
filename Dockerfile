@@ -1,32 +1,33 @@
-# Use an official lightweight Python image
+# Use official Python base image
 FROM python:3.11-slim
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Set working directory
 WORKDIR /app
 
-# Install OS dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc curl build-essential && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# System dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip first
-RUN pip install --upgrade pip
+# Upgrade pip and uninstall deprecated pinecone plugin if exists
+RUN pip install --upgrade pip setuptools wheel \
+ && pip uninstall -y pinecone-plugin-inference || true
 
-# Install Python dependencies
+# Copy requirements and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
+# Copy the rest of the app
 COPY . .
 
-# Expose the default port (optional, Render auto-detects if bound properly)
+# Expose port for Render (important!)
 EXPOSE 8000
 
-# Command to run the app
-# NOTE: This uses $PORT if set (e.g., by Render), else falls back to 8000
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Run the app using uvicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
