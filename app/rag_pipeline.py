@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 from src.helper import download_hugging_face_embeddings
-from pinecone import Pinecone
+from pinecone
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from dotenv import load_dotenv
@@ -21,6 +21,7 @@ from langchain.prompts import PromptTemplate
 # Load .env variables
 load_dotenv()
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_API_ENV = os.environ.get('PINECONE_API_ENV')
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN") 
 
 # download embedding model
@@ -28,7 +29,9 @@ embeddings = download_hugging_face_embeddings()
 
 
 # 2. Initialize Pinecone v3 client
-pc = Pinecone(api_key=PINECONE_API_KEY)
+pc = pinecone.init(api_key=PINECONE_API_KEY,
+              environment=PINECONE_API_ENV)
+
 
 index_name = "restaurant-chatbot"  
 
