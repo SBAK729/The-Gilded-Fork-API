@@ -1,0 +1,14 @@
+{
+  "signature_dishes": [
+    "Truffle Wild Mushroom Risotto",
+    "Charcoal-Seared Wagyu Steak",
+    "Lemon Basil Panna Cotta",
+    "The Gilded Fork Steak Fries",
+    "Molten Chocolate Lava Cake"
+  ],
+  "dietary": {
+    "vegan": true,
+    "gluten_free": true,
+    "nut_free": true
+  }
+}
