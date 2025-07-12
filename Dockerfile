@@ -29,4 +29,4 @@ EXPOSE 8000
 
 # Command to run the app
 # NOTE: This uses $PORT if set (e.g., by Render), else falls back to 8000
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
