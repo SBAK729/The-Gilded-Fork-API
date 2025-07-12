@@ -7,7 +7,7 @@ langchain
 langchain-community
 langchain-huggingface
 langchain-pinecone
-pinecone
+pinecone-client
 pypdf
 python-dotenv
 ctransformers
