@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 from src.helper import download_hugging_face_embeddings
-from pinecone
+import pinecone
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from dotenv import load_dotenv
