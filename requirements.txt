@@ -11,5 +11,3 @@ pinecone
 pypdf
 python-dotenv
 ctransformers
-
--e .
