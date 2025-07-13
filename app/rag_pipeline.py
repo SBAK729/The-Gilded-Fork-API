@@ -11,10 +11,13 @@ import os
 # Load .env variables
 load_dotenv()
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")  # Add this to your .env
+
 
 # Download embeddings (unchanged)
 embeddings = download_hugging_face_embeddings()
+
 
 # Initialize Pinecone
 pc = Pinecone(api_key=PINECONE_API_KEY)
