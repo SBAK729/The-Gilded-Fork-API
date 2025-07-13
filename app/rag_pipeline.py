@@ -41,9 +41,7 @@ chain_type_kwargs = {"prompt": prompt}
 # Initialize Groq (replaces HuggingFaceEndpoint)
 llm = ChatGroq(
     groq_api_key=GROQ_API_KEY,
-    model_name="llama3-70b-8192",  # New Llama 3 70B (recommended)
-    # model_name="llama2-70b-4096",  # Older version (if still available)
-    # model_name="mixtral-8x7b-32768",  # Alternative: Mixtral MoE
+    model_name="llama3-70b-8192",  
     temperature=0.1,
     max_tokens=512
 )

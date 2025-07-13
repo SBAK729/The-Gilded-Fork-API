@@ -10,7 +10,6 @@ class ChatRequest(BaseModel):
 @router.post("/chat")
 def chat(request: ChatRequest):
   question = request.user_query.strip()
-  print(question)
   
   if not question:
         return {"error": "Question cannot be empty."}
